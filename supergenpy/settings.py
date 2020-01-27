@@ -1,3 +1,4 @@
+#The settings.py file contains the configuration of your website.
 """
 Django settings for supergenpy project.
 
