@@ -1,3 +1,4 @@
+#This file contains a list of patterns used by urlresolver
 """supergenpy URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
