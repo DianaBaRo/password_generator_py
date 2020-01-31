@@ -2,8 +2,6 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 
-domain	version	length	hash	type	prefix
-
 class Login(models.Model):
     domain = models.CharField(max_length=50)
     version = models.IntegerField()
