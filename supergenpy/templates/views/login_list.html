@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>Supergenpy</title>
+    </head>
+    <body>
+        <div>
+            <h1><a href="/">Supergenpy</a></h1>
+        </div>
+
+        {% for login in logins %}
+            <div>
+                <p>published: {{ login.published_date }}</p>
+                <h2><a href="">{{ login.domain }}</a></h2>
+                <p>{{ login.version }}</p>
+                <p>{{ login.length }}</p>
+                <p>{{ login.hash }}</p>
+                <p>{{ login.type }}</p>
+                <p>{{ login.prefix }}</p>
+            </div>
+        {% endfor %}
+
+    </body>
+</html>
