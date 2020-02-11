@@ -1,23 +1,36 @@
+{% load static %}
+
 <html>
     <head>
         <title>Supergenpy</title>
+
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        
+        <link rel="stylesheet" href="{% static 'css/supergenpy.css' %}">
+        <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
     </head>
     <body>
-        <div>
+        <div class="page-header">
             <h1><a href="/">Supergenpy</a></h1>
         </div>
 
-        {% for login in logins %}
-            <div>
-                <p>published: {{ login.published_date }}</p>
-                <h2><a href="">{{ login.domain }}</a></h2>
-                <p>{{ login.version }}</p>
-                <p>{{ login.length }}</p>
-                <p>{{ login.hash }}</p>
-                <p>{{ login.type }}</p>
-                <p>{{ login.prefix }}</p>
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                    {% for login in logins %}
+                        <div class="login">
+                            <h2>Domain: <a href="">{{ login.domain }}</a></h2>
+                            <div class="date"><p>published: {{ login.published_date }}</p></div>
+                            <p>Version: {{ login.version }}</p>
+                            <p>Length: {{ login.length }}</p>
+                            <p>Hash: {{ login.hash }}</p>
+                            <p>Type: {{ login.type }}</p>
+                            <p>Prefix: {{ login.prefix }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
-        {% endfor %}
-
+        </div>
     </body>
 </html>
