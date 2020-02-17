@@ -7,3 +7,9 @@ Import your models to the shell: from supergenpy.models import Login
 And then you can play with the data: 
 Login.objects.all()
 Login.objects.create(domain="fromshell")
+
+SuperGenPy
+
+Implementations / Python module (haslib)
+Test Selenium (headless browser)
+Hypothesis (Unit test)
