@@ -3,42 +3,26 @@
 import hashlib
 from urllib.parse import urlparse
 import re
+import base64
 
-def generate(master, url, length=10, algorithm='md5'):
+_valid_pass = \
+    re.compile(r"""^[a-z]                          # start with lowercase
+                   [a-zA-Z0-9]*                    # contains lower and upper case and numbers
+                   (?:(?:[A-Z][a-zA-Z0-9]*[0-9])|  # uppercase lowercae number OR
+                   (?:[0-9][a-zA-Z0-9]*[A-Z]))     # number lowercase uppercase
+                   [a-zA-Z0-9]*$""",               # check for lower and upper case or numbers at the end
+               re.VERBOSE)
 
-    #.encode to prevent typeError : Unicode-objects must be encoded before hashing
-    password = (master + ":" + url).encode('utf-8')
+def generate(master, domain, length=10, algorithm='md5'):
 
-    #salt = bcrypt.gensalt(rounds=16)
-    #hashed = bcrypt.hashpw(password, salt)
-
+    password = master + ":" + domain
     count = 0
+    while count < 10 or not _valid_pass.match(password[:length]):
+        password = hashlib.new(algorithm, password.encode('utf-8')).digest()
+        password = base64.b64encode(password, b'98').decode('ascii')
+        password = password.replace('=', 'A')
+        count += 1
     
-    hashed = hashlib.md5(password).hexdigest()
-
-    return hashed[:length]
-    
-
-def password_check(password):
-    reg = """^[a-z]                          # start with lowercase
-                   [a-zA-Z0-9]*                    # stuff
-                   (?:(?:[A-Z][a-zA-Z0-9]*[0-9])|  # uppercase stuff number OR
-                   (?:[0-9][a-zA-Z0-9]*[A-Z]))     # number stuff uppercase
-                   [a-zA-Z0-9]*$"""
-
-    #compiling regex
-    pat = re.compile(reg)
-
-    #searching regex
-    mat = re.search(pat, password)
-
-    #validating conditions
-    if mat:
-        True
-        print("Password OK")
-    else:
-        False
-        print("Password not OK")
+    return password[:length]
 
 generate("ola", "kease", 10)
-password_check("aywFd0bmnJ")
