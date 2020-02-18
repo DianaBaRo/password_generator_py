@@ -1,7 +1,7 @@
 #import bcrypt
 #import time
 import hashlib
-from urllib.parse import urlparse
+#from urllib.parse import urlparse
 import re
 import base64
 
